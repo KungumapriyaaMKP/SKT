@@ -74,15 +74,15 @@ function nextSlide() {
     showSlide(currentSlide + 1);
 }
 
-// Auto-advance every 5 seconds
-let slideInterval = setInterval(nextSlide, 5000);
+// Auto-advance every 4 seconds
+let slideInterval = setInterval(nextSlide, 4000);
 
 // Manual Dot Navigation
 dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
         clearInterval(slideInterval);
         showSlide(index);
-        slideInterval = setInterval(nextSlide, 5000);
+        slideInterval = setInterval(nextSlide, 4000);
     });
 });
 

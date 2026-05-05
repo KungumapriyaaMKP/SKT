@@ -1119,3 +1119,29 @@ footer {
     }
 }
 
+
+/* --- Professional Form Grid System --- */
+#contact-form {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+}
+
+#contact-form input[name='subject'],
+#contact-form textarea,
+#contact-form button {
+    grid-column: span 2 !important;
+}
+
+@media (max-width: 600px) {
+    #contact-form {
+        grid-template-columns: 1fr !important;
+    }
+    
+    #contact-form input[name='subject'],
+    #contact-form textarea,
+    #contact-form button {
+        grid-column: span 1 !important;
+    }
+}
+
