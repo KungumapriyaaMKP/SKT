@@ -1,0 +1,22 @@
+{
+  "name": "sri-kungumayi-traders",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "npx servor . --reload",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KungumapriyaaMKP/SKT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/KungumapriyaaMKP/SKT/issues"
+  },
+  "homepage": "https://github.com/KungumapriyaaMKP/SKT#readme"
+}
