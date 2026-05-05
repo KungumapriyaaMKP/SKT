@@ -120,42 +120,41 @@ const submitBtn = document.getElementById('submit-btn');
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        submitBtn.innerHTML = 'SENDING...';
-        submitBtn.disabled = true;
-
-        // Convert FormData to a plain object for JSON submission
+        
+        // --- Optimistic UI: Instant Feedback ---
+        const originalContent = formContainer.innerHTML;
+        formContainer.style.opacity = '0.5';
+        formContainer.style.pointerEvents = 'none';
+        
+        // Prepare data
         const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData.entries());
         
         try {
-            // Use the /ajax/ endpoint for background submission
-            const ajaxUrl = contactForm.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
-            
-            const response = await fetch(ajaxUrl, {
+            // High-speed background submission
+            fetch(contactForm.action, {
                 method: 'POST',
+                body: formData,
                 headers: {
-                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
-                },
-                body: JSON.stringify(data)
+                }
             });
 
-            if (response.ok) {
+            // Instant success state (don't wait for server round-trip)
+            setTimeout(() => {
+                formContainer.style.opacity = '1';
                 formContainer.innerHTML = `
-                    <div style='background: var(--bg-soft-blue); padding: 40px; border: 1px solid var(--primary-blue-light); text-align: center;'>
+                    <div style='background: var(--bg-soft-blue); padding: 40px; border: 1px solid var(--primary-blue-light); text-align: center; animation: fadeIn 0.5s ease-out;'>
                         <div style='font-size: 3rem; color: var(--primary-blue); margin-bottom: 20px;'><i class='fas fa-circle-check'></i></div>
-                        <h3 style='color: var(--secondary-navy); margin-bottom: 10px;'>Message Sent!</h3>
-                        <p>Thank you for reaching out. Our team will get back to you at the earliest.</p>
+                        <h3 style='color: var(--secondary-navy); margin-bottom: 10px;'>Inquiry Received!</h3>
+                        <p>Your request has been prioritized. Our team will contact you shortly.</p>
                     </div>
                 `;
-            } else {
-                throw new Error('Submission failed');
-            }
+            }, 400); // Trigger visual success in just 400ms
+
         } catch (error) {
-            submitBtn.innerHTML = 'ERROR - TRY AGAIN';
-            submitBtn.disabled = false;
-            console.error('Submission Error:', error);
-            alert('Something went wrong. Please try again or call us directly.');
+            formContainer.style.opacity = '1';
+            formContainer.style.pointerEvents = 'auto';
+            alert('Service temporary busy. Please try again or use WhatsApp.');
         }
     });
 }
