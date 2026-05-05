@@ -1092,3 +1092,30 @@ footer {
     }
 }
 
+
+/* --- Full Mobile Stack Fixes --- */
+@media (max-width: 768px) {
+    .contact-flex-container {
+        flex-direction: column !important;
+        gap: 50px !important;
+    }
+    
+    #contact-form {
+        grid-template-columns: 1fr !important; /* Force form to single column */
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+        gap: 40px;
+    }
+    
+    .footer-col {
+        padding: 0 20px;
+    }
+    
+    .footer-contact-list li {
+        justify-content: center;
+    }
+}
+
